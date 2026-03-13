@@ -12,7 +12,14 @@ An automated gift-finding agent built as a Google Cloud Function (2nd Gen) in Py
 ## Prerequisites
 
 Before deploying or running this project, you will need:
-- A Google Cloud Project with Cloud Functions enabled.
+- A Google Cloud Project with billing enabled.
+- The following Google Cloud APIs enabled in your project:
+  - **Cloud Functions API**
+  - **Cloud Build API**
+  - **Artifact Registry API**
+  - **Cloud Run API**
+  - **Cloud Logging API**
+  - *(Optional)* **Vertex AI API** (if adapting the `google-genai` client for Vertex AI instead of Google AI Studio).
 - A [Gemini API Key](https://aistudio.google.com/) for generating gift ideas.
 - A [SerpApi API Key](https://serpapi.com/) for searching Amazon.
 - A Gmail account with an **App Password** generated (for sending the emails via SMTP).
