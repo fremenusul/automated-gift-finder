@@ -18,10 +18,13 @@ def get_gift_ideas():
         print("Using Gemini to generate specific gift ideas...")
         try:
             client = genai.Client(api_key=gemini_api_key)
-            prompt = """You are an expert gift recommender. I need 3 specific, unique gift ideas for two women (Alyson, 29, and Lauryn, 26).
-Cost strictly under $20 USD each.
-Meaningful, interesting, or highly useful.
-Must be actual physical items available on Amazon.
+            prompt = """Role: You are an expert personal shopper and trend analyst specializing in finding unique, modern gifts for young professionals.
+Task: Curate a list of 5 specific, highly-rated physical gift ideas for two women (Alyson, 29, and Lauryn, 26) who work in the fast-paced startup space.
+Constraints & Preferences:
+Price: Strictly under $20 USD each.
+Availability: Must be actual physical items readily available on Amazon.com.
+Quality: Must be meaningful, interesting, or highly useful (think clever desk gadgets, unique tech accessories, high-quality everyday carry items, or things that solve a daily annoyance).
+Style: Try to avoid stereotypical 'girly' items like bath bombs, soaps, lotions, or generic candles, but an exceptionally unique or high-quality one is okay occasionally.
 Return ONLY a valid JSON array of objects.
 Each object must have exactly two keys: "name" (a specific, searchable product name, e.g., "Anker 313 Power Bank") and "reason" (a 1-sentence explanation of why it fits the criteria)."""
             
