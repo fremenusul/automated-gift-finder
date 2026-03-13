@@ -21,13 +21,12 @@ def get_gift_ideas():
             prompt = """You are an expert gift recommender. I need 3 specific, unique gift ideas for two women (Alyson, 29, and Lauryn, 26).
 Cost strictly under $20 USD each.
 Meaningful, interesting, or highly useful.
-Avoid stereotypical "girly" items (no lotions, bath bombs, basic candles).
 Must be actual physical items available on Amazon.
 Return ONLY a valid JSON array of objects.
 Each object must have exactly two keys: "name" (a specific, searchable product name, e.g., "Anker 313 Power Bank") and "reason" (a 1-sentence explanation of why it fits the criteria)."""
             
             response = client.models.generate_content(
-                model='gemini-2.5-flash',
+                model='gemini-2.5-pro',
                 contents=prompt,
                 config=types.GenerateContentConfig(
                     response_mime_type="application/json",
