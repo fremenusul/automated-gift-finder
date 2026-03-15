@@ -24,7 +24,7 @@ Constraints & Preferences:
 Price: Strictly under $20 USD each.
 Availability: Must be actual physical items readily available on Amazon.com.
 Quality: Must be meaningful, interesting, or highly useful (think clever desk gadgets, unique tech accessories, high-quality everyday carry items, or things that solve a daily annoyance).
-Style: Try to avoid stereotypical 'girly' items like bath bombs, soaps, lotions, or generic candles, but an exceptionally unique or high-quality one is okay occasionally.
+Style: Girly items are totally fine, as long as they are unique and meaningful.
 Return ONLY a valid JSON array of objects.
 Each object must have exactly two keys: "name" (a specific, searchable product name, e.g., "Anker 313 Power Bank") and "reason" (a 1-sentence explanation of why it fits the criteria)."""
             
