@@ -18,15 +18,15 @@ def get_gift_ideas():
         print("Using Gemini to generate specific gift ideas...")
         try:
             client = genai.Client(api_key=gemini_api_key)
-            prompt = """Role: You are an expert personal shopper and trend analyst specializing in finding unique, modern gifts for young professionals.
-Task: Curate a list of 5 specific, highly-rated physical gift ideas for two women (Alyson, 29, and Lauryn, 26) who work in the fast-paced startup space.
+            prompt = """Role: You are an expert personal shopper and trend analyst specializing in finding unique, non-work-related gifts for young professional women.
+Task: Curate a list of 5 specific, highly-rated physical gift ideas for two women (Alyson, 29, and Lauryn, 26). Do NOT suggest office products, desk accessories, or work-related items.
 Constraints & Preferences:
 Price: Strictly under $20 USD each.
 Availability: Must be actual physical items readily available on Amazon.com.
-Quality: Must be meaningful, interesting, or highly useful (think clever desk gadgets, unique tech accessories, high-quality everyday carry items, or things that solve a daily annoyance).
+Quality: Must be meaningful, interesting, or highly useful. Focus on lifestyle, home decor, self-care, beauty, kitchen gadgets, or quirky fun items.
 Style: Girly items are totally fine, as long as they are unique and meaningful.
 Return ONLY a valid JSON array of objects.
-Each object must have exactly two keys: "name" (a specific, searchable product name, e.g., "Anker 313 Power Bank") and "reason" (a 1-sentence explanation of why it fits the criteria)."""
+Each object must have exactly two keys: "name" (a specific, searchable product name, e.g., "Laneige Lip Sleeping Mask") and "reason" (a 1-sentence explanation of why it fits the criteria)."""
             
             response = client.models.generate_content(
                 model='gemini-2.5-pro',
@@ -41,12 +41,14 @@ Each object must have exactly two keys: "name" (a specific, searchable product n
             print(f"Error calling Gemini API: {e}")
             
     # Fallback curated list if Gemini fails or is not configured
-    if not ideas or len(ideas) < 3:
+    if not ideas or len(ideas) < 5:
         print("Falling back to curated gift ideas...")
         ideas = [
-            {"name": "Tile Mate (2022) - Bluetooth Tracker", "reason": "Highly useful and practical for keeping track of keys, bags, and everyday items."},
-            {"name": "Anker Portable Charger, 313 Power Bank", "reason": "A life-saver for keeping devices charged on the go. Meaningful through its sheer utility."},
-            {"name": "Burt's Bees Hand Repair Gift Set", "reason": "While it skirts the line of 'lotions', this hand repair set is deeply useful for dry weather and stands out from generic bath bombs."}
+            {"name": "Laneige Lip Sleeping Mask", "reason": "A luxurious feeling lip mask that is highly rated and makes a great small gift."},
+            {"name": "Dash Mini Maker Waffle Iron", "reason": "A super cute, fun, and highly practical mini kitchen gadget."},
+            {"name": "Burt's Bees Hand Repair Gift Set", "reason": "Deeply useful for dry weather and stands out from generic bath bombs."},
+            {"name": "CeraVe Hydrating Facial Cleanser", "reason": "A universally useful, highly-rated skincare staple."},
+            {"name": "Gua Sha Facial Rejuvenation Tool", "reason": "A trendy self-care tool that promotes relaxation and skin health."}
         ]
         
     gifts = []
@@ -110,7 +112,7 @@ Each object must have exactly two keys: "name" (a specific, searchable product n
                 "link": f"https://www.amazon.com/s?k={urllib.parse.quote(idea['name'])}"
             })
             
-    return gifts[:3]
+    return gifts[:5]
 
 @functions_framework.http
 def gift_agent(request):
@@ -143,7 +145,7 @@ def gift_agent(request):
       </head>
       <body>
         <h2>Monthly Gift Ideas for Alyson & Lauryn</h2>
-        <p>Here are 3 hand-picked gifts that are interesting, useful, and strictly under $20!</p>
+        <p>Here are 5 hand-picked gifts that are interesting, useful, and strictly under $20!</p>
     """
     
     for idx, gift in enumerate(gifts, 1):
